@@ -5,16 +5,32 @@ from bs4 import BeautifulSoup
 
 site = 'http://kalendar.aktuality.sk/meniny/'
 
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Spt',
+          'Oct', 'Nov', 'Dec']
+
 
 def main():
-    save_test_page(site)
-    # soup = parse_page(site)
-    # print(soup)
-
-
-def test():
     soup = load_test_page()
-    print(soup)
+    # print(soup)
+    root_elem = soup.find(id='content-inner')
+    table_list = root_elem.find_all('table')
+    # dictionary contains list of names for each month
+    cal_dict = {}
+    i = 0
+    # <table> represents a month and <tr> a day
+    for table_elem in table_list:
+        names_month = []
+        for tr_elem in table_elem.find_all('tr'):
+            names_day = []
+            name_data = tr_elem.find('td', class_='value')
+            if name_data is None:
+                continue
+            for a_elem in name_data.find_all('a'):
+                names_day.append(a_elem.string)
+            names_month.append(', '.join(names_day))
+        cal_dict[months[i]] = names_month
+        i += 1
+    print(cal_dict)
 
 
 def parse_page(url, payload=None):
@@ -44,5 +60,4 @@ def load_test_page(filename='test_page'):
 
 
 if __name__ in ["__main__", "builtins", "pydevconsole"]:
-    # main()
-    test()
+    main()
