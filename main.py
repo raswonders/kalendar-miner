@@ -1,4 +1,5 @@
 import sys
+import json
 import pickle
 import requests as req
 from bs4 import BeautifulSoup
@@ -31,8 +32,8 @@ def main():
             names_month.append(', '.join(names_day))
         cal_dict[months[i]] = names_month
         i += 1
-    print(cal_dict)
-    print(soup.original_encoding)
+
+    save_json_as_js(cal_dict, "calendar.js")
 
 
 def parse_page(url, payload=None):
@@ -60,6 +61,12 @@ def save_test_page(url, filename='test_page'):
 def load_test_page(filename='test_page'):
     with open(filename, 'rb') as file:
         return pickle.load(file)
+
+
+def save_json_as_js(data, filename):
+    with open(filename, 'w') as file:
+        file.write('calendar_str = ')
+        file.write(repr(json.dumps(data)))
 
 
 if __name__ in ["__main__", "builtins", "pydevconsole"]:
