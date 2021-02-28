@@ -10,8 +10,9 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Spt',
 
 
 def main():
-    soup = load_test_page()
+    # soup = load_test_page()
     # print(soup)
+    soup = parse_page(site)
     root_elem = soup.find(id='content-inner')
     table_list = root_elem.find_all('table')
     # dictionary contains list of names for each month
@@ -31,11 +32,13 @@ def main():
         cal_dict[months[i]] = names_month
         i += 1
     print(cal_dict)
+    print(soup.original_encoding)
 
 
 def parse_page(url, payload=None):
     try:
         response = req.get(url, payload)
+        response.encoding = "utf-8"
     except req.exceptions.ConnectionError:
         print("ERROR: couldn't connect")
         sys.exit(1)
