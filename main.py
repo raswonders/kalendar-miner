@@ -25,10 +25,9 @@ def main():
         for tr_elem in table_elem.find_all('tr'):
             names_day = []
             name_data = tr_elem.find('td', class_='value')
-            if name_data is None:
-                continue
-            for a_elem in name_data.find_all('a'):
-                names_day.append(a_elem.string)
+            if name_data is not None:
+                for a_elem in name_data.find_all('a'):
+                    names_day.append(a_elem.string)
             names_month.append(', '.join(names_day))
         cal_dict[months[i]] = names_month
         i += 1
