@@ -20,8 +20,13 @@ def main():
     cal_dict = {}
     i = 0
     # <table> represents a month and <tr> a day
+    # first <tr> always add empty name in the zero index
     for table_elem in table_list:
-        names_month = []
+        # First Jan (i == 0) has no name
+        if i == 0:
+            names_month = ['']
+        else:
+            names_month = []
         for tr_elem in table_elem.find_all('tr'):
             names_day = []
             name_data = tr_elem.find('td', class_='value')
