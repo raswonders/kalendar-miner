@@ -30,6 +30,15 @@ def main():
                 for a_elem in name_data.find_all('a'):
                     names_day.append(a_elem.string)
             names_month.append(', '.join(names_day))
+        # 1st Jan (i == 0) and May (i == 4) has no name
+        if i == 0 or i == 4:
+            names_month.insert(1, '')
+        # 2nd Nov (i == 10) has no name
+        elif i == 10:
+            names_month.insert(2, '')
+        # 25th Dec (i == 11) has no name
+        elif i == 11:
+            names_month.insert(25, '')
         cal_dict[months[i]] = names_month
         i += 1
 
