@@ -76,11 +76,18 @@ def save_json_as_js(data, filename):
 
 def test_cal_dict(calendar_dict):
     test_year(calendar_dict)
+    test_month(calendar_dict, 'Jan', 31, '', 'Emil')
 
 
 def test_year(calendar_dict):
     # Calendar has 12 months
     assert len(calendar_dict) == 12, "Should be 12"
+
+
+def test_month(calendar_dict, month_name, month_len, first_name, last_name):
+    assert len(calendar_dict[month_name]) == month_len + 1, "Should be %s" % month_len + 1
+    assert calendar_dict[month_name][1] == first_name, "Should be %s" % first_name
+    assert calendar_dict[month_name][month_len] == last_name, "Should be %s" % last_name
 
 
 if __name__ in ["__main__", "builtins", "pydevconsole"]:
