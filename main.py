@@ -22,11 +22,7 @@ def main():
     # <table> represents a month and <tr> a day
     # first <tr> always add empty name in the zero index
     for table_elem in table_list:
-        # First Jan (i == 0) has no name
-        if i == 0:
-            names_month = ['']
-        else:
-            names_month = []
+        names_month = []
         for tr_elem in table_elem.find_all('tr'):
             names_day = []
             name_data = tr_elem.find('td', class_='value')
@@ -77,6 +73,17 @@ def save_json_as_js(data, filename):
 def test_cal_dict(calendar_dict):
     test_year(calendar_dict)
     test_month(calendar_dict, 'Jan', 31, '', 'Emil')
+    test_month(calendar_dict, 'Feb', 28, 'Tatiana', 'Zlatica')
+    test_month(calendar_dict, 'Mar', 31, 'Albín', 'Benjamín')
+    test_month(calendar_dict, 'Apr', 30, 'Hugo', 'Anastázia')
+    test_month(calendar_dict, 'May', 31, '', 'Petrana, Petronela')
+    test_month(calendar_dict, 'Jun', 30, 'Žaneta', 'Melánia')
+    test_month(calendar_dict, 'Jul', 31, 'Diana', 'Ignác')
+    test_month(calendar_dict, 'Aug', 31, 'Božidara', 'Nora')
+    test_month(calendar_dict, 'Spt', 30, 'Drahoslava', 'Jarolím')
+    test_month(calendar_dict, 'Oct', 31, 'Arnold', 'Aurélia')
+    test_month(calendar_dict, 'Nov', 30, 'Denis, Denisa', 'Ondrej, Andrej')
+    test_month(calendar_dict, 'Dec', 31, 'Edmund', 'Silvester')
 
 
 def test_year(calendar_dict):
@@ -85,7 +92,8 @@ def test_year(calendar_dict):
 
 
 def test_month(calendar_dict, month_name, month_len, first_name, last_name):
-    assert len(calendar_dict[month_name]) == month_len + 1, "Should be %s" % month_len + 1
+    month_len_comp = month_len + 1
+    assert len(calendar_dict[month_name]) == month_len_comp, "Should be %s" % str(month_len_comp)
     assert calendar_dict[month_name][1] == first_name, "Should be %s" % first_name
     assert calendar_dict[month_name][month_len] == last_name, "Should be %s" % last_name
 
