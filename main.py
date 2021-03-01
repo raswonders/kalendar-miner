@@ -37,6 +37,7 @@ def main():
         cal_dict[months[i]] = names_month
         i += 1
 
+    test_cal_dict(cal_dict)
     save_json_as_js(cal_dict, "calendar.js")
 
 
@@ -71,6 +72,15 @@ def save_json_as_js(data, filename):
     with open(filename, 'w') as file:
         file.write('calendar_str = ')
         file.write(repr(json.dumps(data)))
+
+
+def test_cal_dict(calendar_dict):
+    test_year(calendar_dict)
+
+
+def test_year(calendar_dict):
+    # Calendar has 12 months
+    assert len(calendar_dict) == 12, "Should be 12"
 
 
 if __name__ in ["__main__", "builtins", "pydevconsole"]:
