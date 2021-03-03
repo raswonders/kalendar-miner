@@ -89,7 +89,7 @@ def test_cal_dict(calendar_dict):
     test_month(calendar_dict, 'Jun', 30, 'Žaneta', 'Melánia')
     test_month(calendar_dict, 'Jul', 31, 'Diana', 'Ignác')
     test_month(calendar_dict, 'Aug', 31, 'Božidara', 'Nora')
-    test_month(calendar_dict, 'Spt', 30, 'Drahoslava', 'Jarolím')
+    test_month(calendar_dict, 'Sep', 30, 'Drahoslava', 'Jarolím')
     test_month(calendar_dict, 'Oct', 31, 'Arnold', 'Aurélia')
     test_month(calendar_dict, 'Nov', 30, 'Denis, Denisa', 'Ondrej, Andrej')
     test_month(calendar_dict, 'Dec', 31, 'Edmund', 'Silvester')
